@@ -126,7 +126,6 @@ You should see the application’s homepage and be able to interact with the mov
 
 
 ### Unauthantecatied user dashboard
-Unauthantecatied user dashboard.
 ![Unauthantecatied user dashboard](/MovieWebApp%20screanshoots/unloggedin%20user.PNG)
 
 ### Movie Details Page
