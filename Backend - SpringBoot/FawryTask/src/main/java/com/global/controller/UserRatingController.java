@@ -22,21 +22,21 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class UserRatingController {
 
-    private final UserRatingService userRatingService;
+	private final UserRatingService userRatingService;
 
-    private final JwtTokenUtils jwtTokenUtils;
+	private final JwtTokenUtils jwtTokenUtils;
 
-    @PostMapping("/rate")
-    public ResponseEntity<?> rateMovie(@RequestParam("imdbID") String imdbID, @RequestParam("rating") double rating, 
-    		@RequestHeader("Authorization") String authorizationHeader) {
-        try {
-        	String token = authorizationHeader.substring(7); 
-            Long userId = jwtTokenUtils.getUserIdFromToken(token);
-            UserRating ratingResponse = userRatingService.rateMovie(userId, imdbID, rating);
-            log.info("Rating Done Successfully!");
-            return ResponseEntity.ok(ratingResponse);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error rating the movie: " + ex.getMessage());
-        }
-    }
+	@PostMapping("/rate")
+	public ResponseEntity<?> rateMovie(@RequestParam("imdbID") String imdbID, @RequestParam("rating") double rating,
+			@RequestHeader("Authorization") String authorizationHeader) {
+		try {
+			String token = authorizationHeader.substring(7);
+			Long userId = jwtTokenUtils.getUserIdFromToken(token);
+			UserRating ratingResponse = userRatingService.rateMovie(userId, imdbID, rating);
+			log.info("Rating Done Successfully!");
+			return ResponseEntity.ok(ratingResponse);
+		} catch (Exception ex) {
+			return ResponseEntity.badRequest().body("Error rating the movie: " + ex.getMessage());
+		}
+	}
 }

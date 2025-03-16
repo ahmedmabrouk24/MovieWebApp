@@ -22,21 +22,20 @@ import lombok.RequiredArgsConstructor;
 public class UserMoviesController {
 
 	private final UserMoviesService userMovieService;
-	
+
 	// Authenticated users APIs
-	
+
 	@GetMapping("/get-by-id/{imdbID}")
 	public ResponseEntity<?> getMovieById(@PathVariable("imdbID") String imdbID,
 			@RequestHeader("Authorization") String authorizationHeader) {
-        try {
-            MovieDTO movieDTO = userMovieService.getMovieById(imdbID, authorizationHeader);
-        	return ResponseEntity.ok(movieDTO);
-        } catch (RuntimeException ex) {
-            // Handle case where movie is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie with id : " + imdbID + " not found");
-        }
-    }
-	
+		try {
+			MovieDTO movieDTO = userMovieService.getMovieById(imdbID, authorizationHeader);
+			return ResponseEntity.ok(movieDTO);
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie with id : " + imdbID + " not found");
+		}
+	}
+
 	@GetMapping("/{page_no}/get-all")
 	public ResponseEntity<SearchResultDTO> getAllMovies(@PathVariable("page_no") int page_no,
 			@RequestHeader("Authorization") String authorizationHeader) {
@@ -50,20 +49,20 @@ public class UserMoviesController {
 		SearchResultDTO searchResultDTO = userMovieService.getMoviesByTitle(page_no, movieName, authorizationHeader);
 		return ResponseEntity.ok(searchResultDTO);
 	}
-	
+
 	// Unauthenticated users APIs
-	
+
 	@GetMapping("/unauth/get-by-id/{imdbID}")
 	public ResponseEntity<?> getMovieById(@PathVariable("imdbID") String imdbID) {
-        try {
-            MovieDTO movieDTO = userMovieService.getMovieById(imdbID);
-        	return ResponseEntity.ok(movieDTO);
-        } catch (RuntimeException ex) {
-            // Handle case where movie is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie with id : " + imdbID + " not found");
-        }
-    }
-	
+		try {
+			MovieDTO movieDTO = userMovieService.getMovieById(imdbID);
+			return ResponseEntity.ok(movieDTO);
+		} catch (RuntimeException ex) {
+			// Handle case where movie is not found
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie with id : " + imdbID + " not found");
+		}
+	}
+
 	@GetMapping("/unauth/get-by-title/{page_no}/{movieName}")
 	public ResponseEntity<SearchResultDTO> getMoviesByTitle(@PathVariable("page_no") int page_no,
 			@PathVariable("movieName") String movieName) {
@@ -76,7 +75,7 @@ public class UserMoviesController {
 		SearchResultDTO searchResultDTO = userMovieService.getAllMovies(page_no);
 		return ResponseEntity.ok(searchResultDTO);
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@GetMapping("/unauth/isUser")
 	public Boolean isUser(@RequestHeader("Authorization") String authorizationHeader) {

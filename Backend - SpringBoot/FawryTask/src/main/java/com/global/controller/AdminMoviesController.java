@@ -28,30 +28,30 @@ public class AdminMoviesController {
 	private final AdminMovieService adminMovieService;
 
 	@GetMapping("/get-by-id/{imdbID}")
-    public ResponseEntity<?> getMovieById(@PathVariable("imdbID") String imdbID) {
-        try {
-            MovieDTO movieDTO = adminMovieService.getMovieById(imdbID);
-            return ResponseEntity.ok(movieDTO);
-        } catch (RuntimeException ex) {
-            return new ResponseEntity<>("Movie with imdbID: " + imdbID + " not found", HttpStatus.NOT_FOUND);
-        }
-    }
+	public ResponseEntity<?> getMovieById(@PathVariable("imdbID") String imdbID) {
+		try {
+			MovieDTO movieDTO = adminMovieService.getMovieById(imdbID);
+			return ResponseEntity.ok(movieDTO);
+		} catch (RuntimeException ex) {
+			return new ResponseEntity<>("Movie with imdbID: " + imdbID + " not found", HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/get-by-title/{page_no}/{movieTitle}")
 	public ResponseEntity<?> getMoviesByTitle(@PathVariable("page_no") int page_no,
-	    @PathVariable("movieTitle") String movieTitle) {
-	    try {
-	    	SearchResultDTO searchResultDTO = adminMovieService.getMoviesByTitle(page_no, movieTitle);
-		    return ResponseEntity.ok(searchResultDTO);
-        } catch (RuntimeException ex) {
-            return new ResponseEntity<>("Movies with title: " + movieTitle + " not found", HttpStatus.NOT_FOUND);
-        }
+			@PathVariable("movieTitle") String movieTitle) {
+		try {
+			SearchResultDTO searchResultDTO = adminMovieService.getMoviesByTitle(page_no, movieTitle);
+			return ResponseEntity.ok(searchResultDTO);
+		} catch (RuntimeException ex) {
+			return new ResponseEntity<>("Movies with title: " + movieTitle + " not found", HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@PostMapping("/add-movie/{imdbID}")
 	public ResponseEntity<String> addMovie(@PathVariable("imdbID") String imdbID) {
-		
+
 		String responseMessage = adminMovieService.addMovie(imdbID);
 		if (responseMessage.contains("added successfully")) {
 			return new ResponseEntity<>(responseMessage, HttpStatus.OK);
@@ -69,17 +69,17 @@ public class AdminMoviesController {
 			return new ResponseEntity<>(responseMessage, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@PostMapping("/addBatch")
-    public ResponseEntity<String> addMoviesBatch(@RequestBody List<String> imdbIDs) {
-        adminMovieService.addMoviesBatch(imdbIDs);
-        return ResponseEntity.ok("Movies added successfully");
-    }
 
-    @DeleteMapping("/removeBatch")
-    public ResponseEntity<String> removeMoviesBatch(@RequestBody List<String> imdbIDs) {
-    	adminMovieService.removeMoviesBatch(imdbIDs);
-        return ResponseEntity.ok("Movies removed successfully");
-    }
+	@PostMapping("/addBatch")
+	public ResponseEntity<String> addMoviesBatch(@RequestBody List<String> imdbIDs) {
+		adminMovieService.addMoviesBatch(imdbIDs);
+		return ResponseEntity.ok("Movies added successfully");
+	}
+
+	@DeleteMapping("/removeBatch")
+	public ResponseEntity<String> removeMoviesBatch(@RequestBody List<String> imdbIDs) {
+		adminMovieService.removeMoviesBatch(imdbIDs);
+		return ResponseEntity.ok("Movies removed successfully");
+	}
 
 }
