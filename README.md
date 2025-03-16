@@ -125,33 +125,46 @@ You should see the application’s homepage and be able to interact with the mov
 
 
 
-## Screenshots
+### Unauthantecatied user dashboard
 Unauthantecatied user dashboard.
-![Unauthantecatied user dashboard.](/MovieWebApp screanshoots/unloggedin user.PNG)
+![Unauthantecatied user dashboard](/MovieWebApp screanshoots/unloggedin user.PNG)
 
+### Admin View - Batch Adding Movies
 **Movie Details Page** of the Movie Web App, where users can view detailed information about a specific movie, including title, description, and ratings.
-![Movie details page.](/MovieWebApp screanshoots/Movie details page.PNG)
+![Admin View - Batch Adding Movies](/MovieWebApp screanshoots/Movie details page.PNG)
 
+### Login form
 Login form.
-![Login form.](/MovieWebApp screanshoots/loginForm.PNG)
+![Login form](/MovieWebApp screanshoots/loginForm.PNG)
 
+
+### Signup form
 signup form.
-![Signup form.](/MovieWebApp screanshoots/sign up form.PNG)
+![Signup form](/MovieWebApp screanshoots/sign up form.PNG)
 
+
+### User view - show all existing movies
 **User View** of the Movie Web App, where users can browse and view all existing movies available in the system. Additionally, users can **rate any movie** they choose based on their preference.
-![User view - show all existing movies.](/MovieWebApp screanshoots/User view - show all existing movies.PNG)
+![User view - show all existing movies](/MovieWebApp screanshoots/User view - show all existing movies.PNG)
 
+
+### User view - show all existing movies
 **User View** of the Movie Web App, where users can search for specific movies in the database.
-![User view - show all existing movies.](/MovieWebApp screanshoots/User view - show all existing movies.PNG)
+![User view - show all existing movies](/MovieWebApp screanshoots/User view - show all existing movies.PNG)
 
+### Admin view - remove existing movies
 **Admin View** of the Movie Web App, where admins have the ability to **remove existing movies** from the system.
-![Admin view - remove existing movies.](/MovieWebApp screanshoots/Admin view - remove existing movies.PNG)
+![Admin view - remove existing movies](/MovieWebApp screanshoots/Admin view - remove existing movies.PNG)
 
+
+### Admin view - batch removing
 **Admin View** of the Movie Web App, where admins can **batch remove multiple movies** from the system at once, streamlining the process of managing the movie database.
-![Admin view - batch removing.](/MovieWebApp screanshoots/Admin view - batch removing.PNG)
+![Admin view - batch removing](/MovieWebApp screanshoots/Admin view - batch removing.PNG)
 
+
+## Admin view - batch adding
 **Admin View** of the Movie Web App, where admins can **batch add multiple movies** to the system at once, allowing for efficient management and addition of movies to the database.
-![Admin view - batch adding.](/MovieWebApp screanshoots/Admin view - batch adding.PNG)
+![Admin view - batch adding](/MovieWebApp screanshoots/Admin view - batch adding.PNG)
 
 
 
