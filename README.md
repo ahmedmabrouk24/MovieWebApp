@@ -147,7 +147,7 @@ You should see the application’s homepage and be able to interact with the mov
 
 ### User view - search about specific movie
 **User View** of the Movie Web App, where users can search for specific movies in the database.
-![User view - search about specific movie](/MovieWebApp%20screanshoots/User%20view%20-%20serach%20about%20movie.PNG)
+![User view - search about specific movie](/MovieWebApp%20screanshoots/User%20view%20-%20show%20all%20existing%20movies.PNG)
 
 ### Admin view - remove existing movies
 **Admin View** of the Movie Web App, where admins have the ability to **remove existing movies** from the system.
