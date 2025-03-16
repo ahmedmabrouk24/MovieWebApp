@@ -23,8 +23,8 @@ public class StartUpApp implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		// Create admin account internally 
-		if (userService.findByEmail("ahmed@gmail.com") == null) {
+		// Create admin account internally only once
+		if (userService.findByEmail("admin@gmail.com") == null) {
 			Role admin = new Role();
 			admin.setName("ROLE_ADMIN");
 			roleService.insert(admin);
