@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "auth.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.secret'"
+  },
+  {
+    "name": "auth.access.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.access.expiration'"
+  },
+  {
+    "name": "auth.refresh.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.refresh.expiration'"
+  }
+]}

@@ -1,0 +1,60 @@
+<div class="movie-card">
+  <!-- Movie Card Click Area -->
+  <div class="movie-card-click" (click)="onCardClick($event)">
+    <img *ngIf="movie.Poster && movie.Poster !== 'N/A'; else defaultPoster"
+        [src]="movie.Poster"
+        alt="{{ movie.Title }} Poster"
+        class="movie-poster"/>
+    <ng-template #defaultPoster>
+      <img src="/posternotfound.jpg"
+          alt="Default Poster"
+          class="movie-poster" />
+    </ng-template>
+
+    <div class="movie-info">
+      <h2>{{ movie.Title }}</h2>
+      <p class="year">{{ movie.Year }}</p>
+      <p class="type">{{ movie.Type }}</p>
+      <p *ngIf="isUser" class="rating">Rating: {{ movie.userRating }} / 5</p>
+    </div>
+  </div>
+
+  <!-- Movie Operations (Admin Controls) -->
+  <div class="movie-operations">
+    <button class="addButton" 
+            *ngIf="isAdminAdd && !isAdded" 
+            (click)="addMovieButton(movie.imdbID)">
+      Add
+    </button>
+    <button class="addButton disabled" 
+            *ngIf="isAdminAdd && isAdded" 
+            disabled>
+      Added
+    </button>
+    <button class="deleteButton" *ngIf="isAdmin" (click)="deleteMovie(movie.imdbID)">Delete</button>
+    
+    <button class="checkButton" *ngIf="isAdmin || isAdminAdd" (click)="handleSelection()">
+      <span *ngIf="isSelected(movie.imdbID)" class="mark">&#10003;</span> 
+      <span *ngIf="!isSelected(movie.imdbID)" class="empty">&#9744;</span> 
+    </button>
+  </div>
+
+  
+  <!-- Star Rating Section (Visible for Users) -->
+  <div *ngIf="isUser" class="rate">
+    <div class="rate-title-container">
+      <h1 class="rate-title">Rate:</h1>
+      <div class="star-rating">
+        <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <i 
+            class="star"
+            [class.filled]="i < movie.userRating"
+            (click)="rateMovie(movie.imdbID, i + 1)">
+            &#9733; 
+          </i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+

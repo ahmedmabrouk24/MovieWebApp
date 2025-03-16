@@ -1,0 +1,127 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Make sure the entire page uses full height and is centered */
+  body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f7fa;
+  }
+  
+  /* Styling for the login container */
+  .signup-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+  }
+  .form{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 30px;
+    width: 600px;
+    height: auto;
+    background: white;
+    margin-top: -30px;
+  }
+  .form h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #666;
+    margin-top: 20px;
+  }
+  
+  .form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .form input:focus {
+    border-color: #4CAF50;
+  }
+  
+  /* Error message styling */
+  .form .error-message {
+    transition: opacity 0.3s ease-in-out;
+    color: #ff4d4d;
+    font-size: 14px;
+  }
+
+  
+  /* Styling for the submit button */
+  .form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 60px;
+  }
+  
+  .form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .form button:hover {
+    background-color: #45a049;
+  }
+  .success-message {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    /* Fade-in and fade-out animation */
+    animation: fadeInOut 5s ease-out;
+  
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  
+    /* Optional: Add responsiveness */
+    @media (max-width: 768px) {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+  }
+  
+  

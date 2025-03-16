@@ -1,0 +1,7 @@
+html, body {
+  height: 100%; // Ensure the body takes up full height
+  background-image: url('assets/images/background.png');
+  background-size: cover; // Cover the entire viewport
+  color: #fff; // Set the text color to white to contrast with the background
+  font-family: Arial, sans-serif; // Set a global font for your site
+}

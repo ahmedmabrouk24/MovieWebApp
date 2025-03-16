@@ -1,0 +1,41 @@
+<div class = "batchOperationsContainer">
+  <button class="batchDeleteButton" (click)="removeSelectedMovies()" *ngIf="isAdmin && selectedMovies.size > 0" [disabled]="selectedMovies.size === 0">
+    Remove All Selected Movies
+  </button>
+  <button class = "batchAddButton" (click)="addSelectedMovies()" *ngIf="isAdminAdd && selectedMovies.size > 0" [disabled]="selectedMovies.size === 0">
+    Add All Selected Movies
+  </button>
+</div>
+
+<!-- Success or Error Message Display -->
+<div *ngIf="showMessage" class="success-message">
+  Movies Added Successfully!
+</div>
+
+<div class="movie-list">
+  <app-movie-card *ngFor="let movie of movies" 
+                   [movie]="movie" 
+                   [isAdmin]="isAdmin"
+                   [isAdminAdd]="isAdminAdd"
+                   [selectedMovies]="selectedMovies"
+                   (toggleSelection)="toggleSelection(movie.imdbID)">
+  </app-movie-card>
+</div>
+<!-- Pagination Controls -->
+<div class="pagination">
+  <button (click)="onPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+  
+  <span>Page {{currentPage}} of {{totalPages}}</span>
+  
+  <button (click)="onNextPage()" [disabled]="currentPage === totalPages">Next</button>
+  
+  <input 
+    type="number" 
+    [(ngModel)]="currentPage" 
+    (change)="onPageChange(currentPage)" 
+    [min]="1" 
+    [max]="totalPages"
+    [disabled]="totalPages <= 1">
+    
+  <span *ngIf="totalPages > 1">of {{totalPages}} pages</span>
+</div>

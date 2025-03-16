@@ -1,0 +1,49 @@
+<div class="movie-detail-container">
+    <!-- Movie Poster and Info Section -->
+    <div class="movie-header">
+      <img *ngIf="movieDetails?.poster && movieDetails?.poster !== 'N/A'; else defaultPoster" 
+           [src]="movieDetails?.poster" 
+           alt="{{ movieDetails?.title }} Poster" 
+           class="movie-poster" />
+      <ng-template #defaultPoster>
+        <img src="/posternotfound.jpg" 
+             alt="Default Poster" 
+             class="movie-poster" />
+      </ng-template>
+  
+      <div class="movie-info">
+        <h1 class="movie-title">{{ movieDetails?.title }}</h1>
+        <div class="movie-meta">
+          <span class="year">{{ movieDetails?.year }}</span> |
+          <span class="genre">{{ movieDetails?.genre }}</span> |
+          <span class="country">{{ movieDetails?.country }}</span>
+        </div>
+  
+        <div class="ratings">
+          <p class="rating-item"><strong>IMDb:</strong> {{ movieDetails?.imdbRating }} | <strong>Votes:</strong> {{ movieDetails?.imdbVotes }}</p>
+          <p *ngFor="let rating of movieDetails?.ratings" class="rating-item">
+            <strong>{{ rating.Source }}:</strong> {{ rating.Value }}
+          </p>
+        </div>
+  
+        <p class="box-office"><strong>Box Office:</strong> {{ movieDetails?.boxOffice }}</p>
+        <p class="runtime"><strong>Runtime:</strong> {{ movieDetails?.runtime }}</p>
+        <p class="language"><strong>Language:</strong> {{ movieDetails?.language }}</p>
+        <p class="rated"><strong>Rated:</strong> {{ movieDetails?.rated }}</p>
+      </div>
+    </div>
+  
+    <!-- Plot and Additional Info Section -->
+    <div class="movie-additional-info">
+      <h2>Plot</h2>
+      <p class="plot-text">{{ movieDetails?.plot }}</p>
+  
+      <div class="movie-footer">
+        <p><strong>Director:</strong> {{ movieDetails?.director }}</p>
+        <p><strong>Writer:</strong> {{ movieDetails?.writer }}</p>
+        <p><strong>Awards:</strong> {{ movieDetails?.awards }}</p>
+        <p><strong>Actors:</strong> {{ movieDetails?.actors }}</p>
+      </div>
+    </div>
+  </div>
+  

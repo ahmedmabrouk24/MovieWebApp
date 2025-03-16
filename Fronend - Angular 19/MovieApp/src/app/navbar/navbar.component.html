@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-left">
+      <a class="navbar-brand" href="#">
+        <img src="/FawryLogo.png" 
+             class="FawryLogo" />
+      </a>
+    </div>
+    
+    <div class="navbar-center">
+      <input 
+        type="text" 
+        class="search-bar" 
+        placeholder="Search..." 
+        [(ngModel)]="searchText" 
+        (keydown.enter)="fetchSearchText()"
+      />
+    </div>
+
+    <div class="navbar-right">
+      <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </ng-container>
+
+      <ng-template #loggedOut>
+        <button class="btn" (click)="login()">Login</button>
+        <button class="btn" (click)="signup()">Sign Up</button>
+      </ng-template>
+    </div>
+  </div>
+</nav>

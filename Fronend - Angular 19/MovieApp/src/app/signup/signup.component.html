@@ -1,0 +1,31 @@
+<div class="signup-container">
+    <div class="form">
+      <h2>Signup</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+  
+        <div>
+          <label for="userName">User Name</label>
+          <input id="userName" formControlName="userName" type="text" />
+        </div>
+  
+        <div>
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" type="email" />
+        </div>
+        
+        <div>
+          <label for="password">Password</label>
+          <input id="password" formControlName="password" type="password" />
+        </div>
+  
+        <!-- Display error message if there's an error -->
+        <div *ngIf="errorMessage" class="error-message" [ngStyle]="{ 'opacity': errorMessage ? 1 : 1 }">{{ errorMessage }}</div>
+        
+        <!-- Display success message if registration is successful -->
+        <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  
+        <button type="submit" [disabled]="signupForm.invalid">Signup</button>
+      </form>
+    </div>
+  </div>
+  

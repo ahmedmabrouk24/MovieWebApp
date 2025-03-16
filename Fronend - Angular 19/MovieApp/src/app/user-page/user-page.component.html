@@ -1,0 +1,25 @@
+<div class="movie-list">
+    <app-movie-card *ngFor="let movie of movies" 
+      [movie]="movie"
+      [isUser]="isUser">
+    </app-movie-card>
+</div>
+<!-- Pagination Controls -->
+<div class="pagination">
+    <button (click)="onPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+    
+    <span>Page {{currentPage}} of {{totalPages}}</span>
+    
+    <button (click)="onNextPage()" [disabled]="currentPage === totalPages">Next</button>
+    
+    <input 
+      type="number" 
+      [(ngModel)]="currentPage" 
+      (change)="onPageChange(currentPage)" 
+      [min]="1" 
+      [max]="totalPages"
+      [disabled]="totalPages <= 1">
+    
+    <span *ngIf="totalPages > 1">of {{totalPages}} pages</span>
+</div>
+  
