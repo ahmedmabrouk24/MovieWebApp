@@ -129,28 +129,26 @@ You should see the application’s homepage and be able to interact with the mov
 Unauthantecatied user dashboard.
 ![Unauthantecatied user dashboard](/MovieWebApp%20screanshoots/unloggedin%20user.PNG)
 
-### Admin View - Batch Adding Movies
+### Movie Details Page
 **Movie Details Page** of the Movie Web App, where users can view detailed information about a specific movie, including title, description, and ratings.
-![Admin View - Batch Adding Movies](/MovieWebApp%20screanshoots/Movie%20details%20page.PNG)
+![Movie Details Page](/MovieWebApp%20screanshoots/Movie%20details%20page.PNG)
 
 ### Login form
-Login form.
 ![Login form](/MovieWebApp%20screanshoots/loginForm.PNG)
 
 
 ### Signup form
-signup form.
 ![Signup form](/MovieWebApp%20screanshoots/sign%20up%20form.PNG)
 
 
 ### User view - show all existing movies
 **User View** of the Movie Web App, where users can browse and view all existing movies available in the system. Additionally, users can **rate any movie** they choose based on their preference.
-![User view - show all existing movies](/MovieWebApp%20screanshoots/User%20view%20-%20show%20all%20existing movies.PNG)
+![User view - show all existing movies](/MovieWebApp%20screanshoots/User%20view%20-%20show%20all%20existing%20movies.PNG)
 
 
 ### User view - show all existing movies
 **User View** of the Movie Web App, where users can search for specific movies in the database.
-![User view - show all existing movies](/MovieWebApp%20screanshoots/User%20view%20-%20show%20all%20existing movies.PNG)
+![User view - show all existing movies](/MovieWebApp%20screanshoots/User%20view%20-%20show%20all%20existing%20movies.PNG)
 
 ### Admin view - remove existing movies
 **Admin View** of the Movie Web App, where admins have the ability to **remove existing movies** from the system.
