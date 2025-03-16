@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +27,12 @@ import { UserPageComponent } from './user-page/user-page.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(private movieService: MovieService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.clearLocalStorage();
+  }
+  clearLocalStorage(): void{
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
   }
 }
