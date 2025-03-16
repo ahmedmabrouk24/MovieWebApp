@@ -35,7 +35,6 @@ public class AuthenticationService {
     private final UserService userService;
     private final JwtTokenUtils jwtTokenUtils;
 
-    // Handles user login, authenticates the user, and generates JWT tokens.
     public JWTResponseDto login(String email, String password) {
         Authentication authentication = authenticateUser(email, password);
         AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
@@ -45,7 +44,6 @@ public class AuthenticationService {
         return buildJWTResponse(tokenInfo);
     }
 
-    // Authenticates the user based on username and password.
     private Authentication authenticateUser(String email, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password));
@@ -55,7 +53,6 @@ public class AuthenticationService {
         return authentication;
     }
 
-    // Builds the JWT response DTO from TokenInfo object.
     private JWTResponseDto buildJWTResponse(TokenInfo tokenInfo) {
         return JWTResponseDto.builder()
                 .accessToken(tokenInfo.getAccessToken())
@@ -63,7 +60,6 @@ public class AuthenticationService {
                 .build();
     }
 
-    // Creates and saves the JWT tokens (access token and refresh token) for the user.
     public TokenInfo createLoginToken(String email, long userId) {
         try {
             log.info("Creating login token...");
@@ -82,40 +78,32 @@ public class AuthenticationService {
             return tokenInfoService.save(tokenInfo);
         } catch (UnknownHostException e) {
             log.error("Error generating token: ", e);
-            throw new RuntimeException("Error generating token", e); // Re-throw or handle accordingly
+            throw new RuntimeException("Error generating token", e); 
         }
     }
 
-    // Generates a JWT token with a unique identifier.
     private String generateToken(String email, boolean isRefreshToken) {
         String tokenId = UUID.randomUUID().toString();
         return JwtTokenUtils.generateToken(email, tokenId, isRefreshToken);
     }
 
-    // Refreshes the access token using the provided refresh token.
     public AccessTokenDto refreshAccessToken(RefreshTokenDto refreshTokenDto) {
     	
     	String refreshToken = refreshTokenDto.getRefreshToken();
-        // Check if the refresh token is expired
         if (jwtTokenUtils.isTokenExpired(refreshToken)) {
             return null;
         }
 
-        //String userName = jwtTokenUtils.getUserNameFromToken(refreshToken);
         String email = jwtTokenUtils.getEmailFromToken(refreshToken);
         
         Optional<TokenInfo> refresh = tokenInfoService.findByRefreshToken(refreshToken);
 
-        // If refresh token is valid, generate a new access token
         return refresh.map(tokenInfo -> new AccessTokenDto(generateToken(email, false))).orElse(null);
     }
 
-    // Logs out the user by invalidating the refresh token.
     public void logoutUser(String refreshToken) {
-    	// Extract the refresh token from the Authorization header
         String token = refreshToken.startsWith("Bearer ") ? refreshToken.substring(7) : refreshToken;
         Optional<TokenInfo> tokenInfo = tokenInfoService.findByRefreshToken(token);
-        // If the refresh token exists, delete it from the database
         tokenInfo.ifPresent(info -> tokenInfoService.deleteById(info.getId()));
     }
 }

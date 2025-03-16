@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MovieService } from '../service/movie/movie.service';
 import { AdminMovieService } from '../service/admin service/admin-service.service';
 import { UserMovieService } from '../service/user service/user-service.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../service/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Inject, PLATFORM_ID } from '@angular/core';
@@ -20,8 +20,8 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  isLoggedIn: boolean = false; // Track if the user is logged in
-  searchText: string = ''; // For search input
+  isLoggedIn: boolean = false; 
+  searchText: string = ''; 
   accessToken: string ='';
 
   constructor(
@@ -33,8 +33,16 @@ export class NavbarComponent {
     @Inject(PLATFORM_ID) private platformId: Object) {}
 
     ngOnInit(): void {
-      this.checkLoginStatus(); // Check login status when the component initializes
-      this.fetchSearchText(); // Continue to fetch search text as before
+      this.checkLoginStatus(); 
+      this.fetchSearchText();
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.checkLoginStatus(); 
+          this.fetchSearchText();
+        }
+      });
+
     }
     
   fetchSearchText(): void {
@@ -46,23 +54,22 @@ export class NavbarComponent {
 
   checkLoginStatus(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Check if a specific key exists in localStorage (e.g., 'accessToken')
       if (localStorage.getItem('accessToken')) {
+        console.log("is logged in is true");
         this.isLoggedIn = true;
       } else {
+        console.log("is logged in is false");
         this.isLoggedIn = false;
       }
     } else {
-      this.isLoggedIn = false;  // Assume user is not logged in if not in the browser
+      this.isLoggedIn = false;  
     }
   }
 
-  // Methods to handle login, signup, and logout
   login(): void {
     console.log(this.searchText);
     console.log('Login clicked');
-    this.isLoggedIn = true;
-    this.router.navigate(['/login']);  // Navigate to the login page
+    this.router.navigate(['/login']);  
   }
 
   signup(): void {
@@ -72,26 +79,19 @@ export class NavbarComponent {
 
   logout(): void {
     console.log('Logout clicked');
-    
-    // Get the refreshToken from localStorage
     const refreshToken = this.getRefreshToken();
     console.log("the refresh token is " + refreshToken)
     if (refreshToken) {
-      // Call the logout API via AuthService
       this.authService.logout(refreshToken).subscribe({
         next: (response) => {
           console.log('Logout API response:', response);
-          // Clear localStorage on successful logout
           localStorage.clear();
 
           this.isLoggedIn = false;
-
-          // Navigate to the home page after successful logout
           this.router.navigate(['']);
         },
         error: (error) => {
           console.error('Error during logout API call:', error);
-          // Log the full error to get more details
           if (error instanceof HttpErrorResponse) {
             console.error('Error status:', error.status);
             console.error('Error message:', error.message);
@@ -101,7 +101,6 @@ export class NavbarComponent {
       });
     } else {
       console.log('No refreshToken found in localStorage');
-      // If no refreshToken, just clear the localStorage and log the user out
       localStorage.clear();
 
       this.isLoggedIn = false;
@@ -120,9 +119,9 @@ export class NavbarComponent {
   getRefreshToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('refreshToken');
-      return token ? token : null;  // Returns the token if found, or null if not found
+      return token ? token : null;  
     }
-    return null;  // Return null if not in the browser
+    return null;  
   }
   
 }

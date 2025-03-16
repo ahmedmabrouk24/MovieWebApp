@@ -21,22 +21,16 @@ public class MovieMapper {
 	@Autowired
 	private static UserRatingRepository userRatingRepository;
 	
-	 // Method to map a list of Movie entities to SearchResultDTO
 	public static SearchResultDTO toSearchResultDTO(List<Movie> movies, String authorizationHeader) {
-	    // Extract the token from the authorization header
-	    String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
-	    Long userId = jwtTokenUtils.getUserIdFromToken(token); // Get the user ID from the JWT token
+	    String token = authorizationHeader.substring(7); 
+	    Long userId = jwtTokenUtils.getUserIdFromToken(token); 
 
-	    // Map the list of Movie entities to MovieSummaryDTO
+
 	    List<MovieSummaryDTO> movieSummaryDTOS = movies.stream()
             .map(movie -> {
-            // Fetch the user's rating for this movie
             UserRating userRating = userRatingRepository.findByUser_IdAndMovie_ImdbID(userId, movie.getImdbID());
-            
-            // If the user has rated this movie, use that rating, otherwise set it to 0
             double userRatingValue = userRating != null ? userRating.getRating() : 0;
-            
-            // Create MovieSummaryDTO and set the user rating
+
             MovieSummaryDTO movieSummaryDTO = new MovieSummaryDTO(
                     movie.getTitle(),
                     movie.getYear(),
@@ -46,7 +40,6 @@ public class MovieMapper {
                     userRatingValue);
                     return movieSummaryDTO; }).collect(Collectors.toList());
 
-	    // Return SearchResultDTO with the list of MovieSummaryDTOs
 	    return new SearchResultDTO(movieSummaryDTOS, String.valueOf(movies.size()), "True");
 	}
     public static MovieDTO toMovieDTO(Movie movie) {
@@ -82,7 +75,6 @@ public class MovieMapper {
         return movieDTO;
     }
     
- // Method to map a MovieDTO to a Movie entity
     public static Movie toMovieEntity(MovieDTO movieDTO) {
         Movie movie = new Movie();
         

@@ -7,16 +7,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class UserMovieService {
 
-  private apiUrl = 'http://localhost:8080/user/api/v1/movies'; // Base URL for your movie endpoints
+  private apiUrl = 'http://localhost:8080/user/api/v1/movies'; 
 
-  private searchTextSubject = new BehaviorSubject<string>(''); // Holds the search text
+  private searchTextSubject = new BehaviorSubject<string>(''); 
   searchText$ = this.searchTextSubject.asObservable();
   
   constructor(private http:HttpClient) { }
   
-  // Method to update the search text
   setSearchText(searchText: string): void {
-    this.searchTextSubject.next(searchText); // Update the search text
+    this.searchTextSubject.next(searchText); 
   }
 
   getMovieById(imdbID: string, accessToken: string): Observable<any> {

@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-/* Pagination Controls */
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -16,11 +16,11 @@
 
 .pagination button {
     padding: 12px 20px;
-    font-size: 18px;  /* Bigger text */
-    font-weight: bold;  /* Bold text */
+    font-size: 18px;  
+    font-weight: bold;  
     cursor: pointer;
     background-color: #007bff;
-    color: #fff;  /* White text */
+    color: #fff;  
     border: 1px solid #007bff;
     border-radius: 5px;
     transition: all 0.3s ease;
@@ -67,9 +67,9 @@
 }
 
 .pagination .ellipsis {
-    font-size: 20px;  /* Bigger text */
-    font-weight: bold;  /* Bold text */
-    color: #fff;  /* White text */
+    font-size: 20px;  
+    font-weight: bold;  
+    color: #fff;  
     cursor: default;
 }
 

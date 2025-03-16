@@ -54,22 +54,18 @@ public class UserService implements UserDetailsService{
 	}
 	
 	public String signup(SignupRequestDto signupRequestDto) {
-	    // Check if the email already exists in the database
 	    Optional<User> existingUser = userRepository.findByEmail(signupRequestDto.getEmail());
 	    if (existingUser.isPresent()) {
 	        return "Email already exists!";  
 	    }
 
-	    // Hash the password
 	    String hashedPassword = passwordEncoder.encode(signupRequestDto.getPassword());
 
-	    // Create a new User object
 	    User AppUser = new User();
 	    AppUser.setEmail(signupRequestDto.getEmail());
 	    AppUser.setPassword(hashedPassword);
 	    AppUser.setUsername(signupRequestDto.getUserName());
 
-	    // Assign a "ROLE_USER" to the new user
 	    Role userRole = roleService.findByName("ROLE_USER");
 	    if (userRole == null) {
 	        userRole = new Role();
@@ -81,7 +77,6 @@ public class UserService implements UserDetailsService{
 	    userRoles.add(userRole);
 	    AppUser.setRoles(userRoles);
 
-	    // Save the user in the database
 	    userRepository.save(AppUser);
 	    return "User registered successfully!";
 	}

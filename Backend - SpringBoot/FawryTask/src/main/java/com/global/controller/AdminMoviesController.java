@@ -2,7 +2,6 @@ package com.global.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,10 +25,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminMoviesController {
 
-	@Autowired
 	private final AdminMovieService adminMovieService;
 
-	 @GetMapping("/get-by-id/{imdbID}")
+	@GetMapping("/get-by-id/{imdbID}")
     public ResponseEntity<?> getMovieById(@PathVariable("imdbID") String imdbID) {
         try {
             MovieDTO movieDTO = adminMovieService.getMovieById(imdbID);

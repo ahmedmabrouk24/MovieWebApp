@@ -15,7 +15,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export class SignupComponent {
   signupForm: FormGroup;
   errorMessage: string = '';
-  successMessage: string = ''; // Declare successMessage
+  successMessage: string = ''; 
 
   user = {
     userName: '',
@@ -25,7 +25,7 @@ export class SignupComponent {
   
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,  // Inject AuthService
+    private authService: AuthService,
     private router: Router
   ) {
     this.signupForm = this.fb.group({

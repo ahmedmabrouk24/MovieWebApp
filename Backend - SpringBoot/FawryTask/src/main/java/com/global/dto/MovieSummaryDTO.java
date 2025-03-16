@@ -27,5 +27,5 @@ public class MovieSummaryDTO {
 	@JsonProperty("Poster")
 	private String poster;
 	
-	private double userRating;  // The rating given by the current user for this movie
+	private double userRating;  
 }

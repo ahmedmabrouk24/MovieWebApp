@@ -18,9 +18,9 @@ export class MovieListComponent {
   movies: any[] = [];
   searchText: string = '';
   currentPage: number = 1;
-  resultsPerPage: number = 12;  // Adjust as per your preference
-  totalResults: number = 0;     // Total number of results (from API)
-  totalPages: number = 0;       // Total number of pages
+  resultsPerPage: number = 12;  
+  totalResults: number = 0;     
+  totalPages: number = 0;       
   imdbID: string = ''; 
   movieTitle: string = '';
   accessToken: string = '';
@@ -29,14 +29,10 @@ export class MovieListComponent {
 
   constructor(
     private movieService: MovieService,
-    private adminMovieService: AdminMovieService,
-    private authService: AuthService,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router) {}
+    @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     this.getToken();
-    // Subscribe to search text changes
     this.movieService.searchText$.subscribe(searchText => {
       this.searchText = searchText;
       console.log('Search Text from movie list Updated: ', this.searchText);
@@ -53,9 +49,9 @@ export class MovieListComponent {
     if (this.searchText === ''){
       this.movieService.getMoviesList(this.currentPage).subscribe(response => {
         if (response && response.Search) {
-          this.movies = response.Search;  // Assign the movies from the API response
-          this.totalResults = response.totalResults;  // Assuming the API returns the total count of movies
-          this.totalPages = Math.ceil(this.totalResults / this.resultsPerPage); // Calculate total pages
+          this.movies = response.Search;  
+          this.totalResults = response.totalResults;  
+          this.totalPages = Math.ceil(this.totalResults / this.resultsPerPage); 
         }
       });
     }
@@ -65,11 +61,10 @@ export class MovieListComponent {
     }
   }
 
-  // Fetch movies by title with pagination
   searchMoviesByTitle() {
     if (this.movieTitle) {
       this.movieService.getMoviesByTitle(this.searchText, this.currentPage).subscribe(response => {
-        this.movies = response.Search;  // Assign the movies from the API response
+        this.movies = response.Search;  
         this.totalResults = response.totalResults;  
         this.totalPages = Math.ceil(this.totalResults / this.resultsPerPage); 
       });

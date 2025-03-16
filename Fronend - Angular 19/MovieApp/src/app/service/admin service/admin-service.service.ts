@@ -7,21 +7,18 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class AdminMovieService {
 
-  private apiUrl = 'http://localhost:8080/admin/api/v1/movies'; // Base URL for admin movie endpoints
+  private apiUrl = 'http://localhost:8080/admin/api/v1/movies'; 
 
-  private searchTextSubject = new BehaviorSubject<string>(''); // Holds the search text
+  private searchTextSubject = new BehaviorSubject<string>(''); 
     searchText$ = this.searchTextSubject.asObservable();
   
   constructor(private http:HttpClient) { }
 
-
-  // Method to update the search text
   setSearchText(searchText: string): void {
-    this.searchTextSubject.next(searchText); // Update the search text
+    this.searchTextSubject.next(searchText); 
   }
   
 
-  // Fetch movie by IMDb ID
   getMovieById(imdbID: string, accessToken: string): Observable<any> {
     const url = `${this.apiUrl}/get-by-id/${imdbID}`;
     console.log("call -> " + url)
@@ -31,7 +28,6 @@ export class AdminMovieService {
     return this.http.get<any>(url, { headers });
   }
 
-  // Fetch movies by title with pagination
   getMoviesByTitle(pageNo: number, movieTitle: string, accessToken: string): Observable<any> {
     const url = `${this.apiUrl}/get-by-title/${pageNo}/${movieTitle}`;
     const headers = new HttpHeaders({
@@ -40,7 +36,6 @@ export class AdminMovieService {
     return this.http.get<any>(url, { headers });
   }
 
-  // Add movie by IMDb ID
   addMovie(imdbID: string, accessToken: string): Observable<string> {
     const url = `${this.apiUrl}/add-movie/${imdbID}`;
     const headers = new HttpHeaders({
@@ -49,7 +44,6 @@ export class AdminMovieService {
     return this.http.post<string>(url, {}, { headers, responseType: 'text' as 'json' });
   }
 
-  // Delete movie by IMDb ID
   deleteMovie(imdbID: string, accessToken: string): Observable<string> {
     const url = `${this.apiUrl}/delete-movie/${imdbID}`;
     console.log("call : " + url);
@@ -59,7 +53,6 @@ export class AdminMovieService {
     return this.http.delete<string>(url, { headers, responseType: 'text' as 'json' });
   }
 
-  // Add movies in batch
   addMoviesBatch(imdbIDs: string[], accessToken: string): Observable<string> {
     const url = `${this.apiUrl}/addBatch`;
     const headers = new HttpHeaders({

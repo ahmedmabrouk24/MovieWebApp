@@ -11,7 +11,6 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 interface Movie {
   title: string;
   imdbID: string;
-  // Add other properties that you expect in a movie object
 }
 
 @Component({
@@ -23,15 +22,15 @@ interface Movie {
 export class AdminPageComponent implements OnInit {
   movies: any[] = [];
   movieTitle: string = '';
-  imdbID: string = ''; // For adding and deleting movies by IMDb ID
+  imdbID: string = ''; 
   pageNo: number = 1;
-  accessToken: string = ''; // Get token from localStorage
-  batchImdbIDs: string[] = []; // For batch add and remove
+  accessToken: string = ''; 
+  batchImdbIDs: string[] = []; 
   searchText: string = '';
   currentPage: number = 1;
-  resultsPerPage: number = 12;  // Adjust as per your preference
-  totalResults: number = 0;     // Total number of results (from API)
-  totalPages: number = 0;       // Total number of pages
+  resultsPerPage: number = 12;  
+  totalResults: number = 0;     
+  totalPages: number = 0;    
   isAdmin: boolean = true;
   isAdminAdd: boolean = false;
   selectedMovies: Set<string> = new Set();
@@ -77,7 +76,9 @@ export class AdminPageComponent implements OnInit {
       console.log("array of ides : " + imdbIDs);
       this.adminMovieService.removeMoviesBatch(imdbIDs, this.accessToken).subscribe({
         next: (response) => {
-          console.log('Movies removed successfully:', response);
+          console.log(response);
+          this.fetchMovies();
+          this.selectedMovies.clear();
         },
         error: (error) => {
           console.error('Error removing movies:', error);
@@ -86,10 +87,8 @@ export class AdminPageComponent implements OnInit {
     } else {
       console.log('No movies selected to remove.');
     }
-    window.location.reload();
   }
 
-  // Add movies in batch
   addSelectedMovies() {
     if (this.selectedMovies.size > 0) {
       const imdbIDs = Array.from(this.selectedMovies);  
@@ -99,6 +98,7 @@ export class AdminPageComponent implements OnInit {
       this.adminMovieService.addMoviesBatch(imdbIDs, this.accessToken).subscribe({
         next: (response) => {
           console.log('Movies added successfully:', response);
+          this.selectedMovies.clear();
           this.showMessage = true;  
             setTimeout(() => {
               this.showMessage = false;
@@ -116,29 +116,29 @@ export class AdminPageComponent implements OnInit {
   toggleSelection(imdbID: string): void {
     if (this.selectedMovies.has(imdbID)) {
       console.log("delete from list");
-      this.selectedMovies.delete(imdbID);  // Unselect movie
+      this.selectedMovies.delete(imdbID);  
     } else {
       console.log("add to list");
-      this.selectedMovies.add(imdbID);  // Select movie
+      this.selectedMovies.add(imdbID);  
     }
   }
 
   getAllMovies(){
     this.movieService.getMoviesList(this.currentPage).subscribe(response => {
       if (response && response.Search) {
-        this.movies = response.Search;  // Assign the movies from the API response
-        this.totalResults = response.totalResults;  // Assuming the API returns the total count of movies
-        this.totalPages = Math.ceil(this.totalResults / this.resultsPerPage); // Calculate total pages
+        this.movies = response.Search;  
+        this.totalResults = response.totalResults;  
+        this.totalPages = Math.ceil(this.totalResults / this.resultsPerPage); 
       }
     });
   }
-  // Fetch movies by title with pagination
+  
   searchMoviesByTitle() {
     this.isAdminAdd = true;
     this.isAdmin = false;
     if (this.movieTitle && this.accessToken) {
       this.adminMovieService.getMoviesByTitle(this.currentPage, this.searchText, this.accessToken).subscribe(response => {
-        this.movies = response.Search;  // Assign the movies from the API response
+        this.movies = response.Search; 
         this.totalResults = response.totalResults;  
         this.totalPages = Math.ceil(this.totalResults / this.resultsPerPage); 
       });

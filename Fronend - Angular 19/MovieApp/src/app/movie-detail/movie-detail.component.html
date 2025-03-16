@@ -1,5 +1,4 @@
 <div class="movie-detail-container">
-    <!-- Movie Poster and Info Section -->
     <div class="movie-header">
       <img *ngIf="movieDetails?.poster && movieDetails?.poster !== 'N/A'; else defaultPoster" 
            [src]="movieDetails?.poster" 
@@ -32,8 +31,7 @@
         <p class="rated"><strong>Rated:</strong> {{ movieDetails?.rated }}</p>
       </div>
     </div>
-  
-    <!-- Plot and Additional Info Section -->
+
     <div class="movie-additional-info">
       <h2>Plot</h2>
       <p class="plot-text">{{ movieDetails?.plot }}</p>

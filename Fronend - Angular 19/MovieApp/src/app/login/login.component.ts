@@ -36,7 +36,6 @@ export class LoginComponent {
     this.authService.login(email, password).subscribe({
       next: (response) => {
         console.log(response);
-        // Store the tokens in localStorage or any state management
         localStorage.setItem('accessToken', response.accessToken);
         localStorage.setItem('refreshToken', response.refreshToken);
         console.log(localStorage.getItem('accessToken'));
@@ -45,13 +44,11 @@ export class LoginComponent {
         this.authService.isUser(response.accessToken).subscribe({
           next: (isUser: boolean) => {
             localStorage.setItem('isUser', JSON.stringify(isUser));
-            console.log("set is user in local storage " + localStorage.getItem('isUser'));
-             // Redirect based on admin status
              if (isUser) {
-              console.log("This is normal user")
+              console.log("User logged in successfully!")
               this.router.navigate(['/user-page']); 
             } else {
-              console.log("This is admin user")
+              console.log("Admin logged in successfully!")
               this.router.navigate(['/admin-page']); 
             }
           },

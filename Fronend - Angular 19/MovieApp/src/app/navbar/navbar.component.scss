@@ -1,4 +1,4 @@
-// Navbar Component Styles
+
 $primary-color: #007bff;
 $hover-color: #0056b3;
 $navbar-bg-color: #1a1a1a;
@@ -41,12 +41,12 @@ $border-radius: 4px;
     text-align: right;
   }
   .FawryLogo {
-    border-radius: 10px; /* Rounded corners */
-    transition: transform 0.3s ease-in-out; /* Smooth transition for zoom effect */
+    border-radius: 10px; 
+    transition: transform 0.3s ease-in-out; 
   }
   
   .FawryLogo:hover {
-    transform: scale(1.1); /* Zoom in by 20% */
+    transform: scale(1.1); 
   }
   .navbar-brand {
     font-size: 1.5rem;

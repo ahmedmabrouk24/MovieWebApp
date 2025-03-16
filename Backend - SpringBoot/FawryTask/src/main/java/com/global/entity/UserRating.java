@@ -21,12 +21,12 @@ public class UserRating {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonBackReference("user-rating-movie") // Prevents infinite recursion
+	@JsonBackReference("user-rating-movie") 
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "movie_imdbID")
-	@JsonBackReference("movie-user-rating") // Prevents infinite recursion
+	@JsonBackReference("movie-user-rating") 
 	private Movie movie;
 
 	private double rating;

@@ -23,13 +23,11 @@ public class GlobalExceptionHandler {
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
-
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
     
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<String> handleUsernameNotFoundException(UsernameNotFoundException ex) {
-        // Customize the error response here
         String errorMessage = "Authentication failed: " + ex.getMessage();
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }

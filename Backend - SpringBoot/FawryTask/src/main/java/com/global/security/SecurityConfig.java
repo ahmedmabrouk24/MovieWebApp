@@ -12,10 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,16 +38,16 @@ public class SecurityConfig {
 		.cors(AbstractHttpConfigurer::disable)
 		.authorizeHttpRequests(authorizeRequests -> 
 			authorizeRequests
-				.requestMatchers("/api/v1/auth/**").permitAll() // Allow all
+				.requestMatchers("/api/v1/auth/**").permitAll() 
 				.requestMatchers("/api/v1/auth/login", "/api/v1/auth/signup").permitAll()
 				.requestMatchers("/user/api/v1/movies/unauth/**").permitAll()
 				.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-				.anyRequest().permitAll()) // Other paths require only authentication
+				.anyRequest().permitAll()) 
 		.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
 		.formLogin(formLogin -> formLogin.defaultSuccessUrl("/home/user/playPage"))
-		.logout(logout -> logout.permitAll()) // Allow access to logout functionality
+		.logout(logout -> logout.permitAll()) 
 		.exceptionHandling(exceptionHandling ->
-        	exceptionHandling.authenticationEntryPoint(jwtUnAuthResponse)) // Handle unauthorized access
+        	exceptionHandling.authenticationEntryPoint(jwtUnAuthResponse)) 
 		.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();

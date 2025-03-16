@@ -19,7 +19,7 @@ export class MovieCardComponent implements OnInit {
   @Input() isUser: boolean = false;
   @Input() isAdminAdd: boolean = false; 
   @Input() selectedMovies: Set<string> = new Set();
-  @Output() toggleSelection = new EventEmitter<string>();  // Emit the imdbID when the selection changes
+  @Output() toggleSelection = new EventEmitter<string>();  
 
   isAdded: boolean = false ;
   accessToken: string = '';
@@ -35,18 +35,16 @@ export class MovieCardComponent implements OnInit {
     this.getToken();
   }
 
-  // Check if movie is selected
   isSelected(imdbID: string): boolean {
     return this.selectedMovies.has(imdbID);
   }
 
   handleSelection() {
-    this.toggleSelection.emit(this.movie.imdbID);  // Emit the imdbID to the parent
+    this.toggleSelection.emit(this.movie.imdbID);  
   }
 
   onCardClick(event: MouseEvent): void {
     if (this.clickButton == false){
-      console.log("Film is clicked", event);
       this.router.navigate(['/movie-detail', this.movie.imdbID]);
     }
     this.clickButton = false;
@@ -69,12 +67,9 @@ export class MovieCardComponent implements OnInit {
     this.clickButton = true;
       if (this.isAdmin){
       console.log('Deleting movie with IMDB ID: ', imdbID);
-      console.log('is admin -> ' + this.isAdmin);
-      console.log('is admin add -> ' + this.isAdminAdd);
-
       this.adminMovieService.deleteMovie(imdbID, this.accessToken).subscribe({
         next: (response) => {
-          console.log('Movie deleted successfully:', response);
+          console.log(response);
         },
         error: (error) => {
           console.error('Error deleting movie:', error);
@@ -87,7 +82,6 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
-  // Add movie by IMDb ID
   addMovieButton(imdbID: string): void{
     console.log('ADDing movie with IMDB ID: ', imdbID);
     this.adminMovieService.addMovie(imdbID, this.accessToken)

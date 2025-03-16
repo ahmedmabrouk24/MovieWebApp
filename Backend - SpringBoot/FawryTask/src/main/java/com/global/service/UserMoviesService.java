@@ -31,7 +31,7 @@ public class UserMoviesService {
     private final UserRatingRepository userRatingRepository;
     
     @Autowired
-    private final JwtTokenUtils jwtTokenUtils; // Utility to decode JWT token
+    private final JwtTokenUtils jwtTokenUtils; 
 
     public Boolean isUser(@RequestHeader("Authorization") String authorizationHeader) {
     	authorizationHeader = authorizationHeader.substring(7);
@@ -39,18 +39,15 @@ public class UserMoviesService {
 		return (!email.equals("admin@gmail.com"));
 	}
     
-    // Fetch movie by ID and include the user's rating
     public MovieDTO getMovieById(String imdbID, String authorizationHeader) {
         Movie movie = movieRepository.findByImdbID(imdbID)
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
 
-        String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
+        String token = authorizationHeader.substring(7); 
         Long userId = jwtTokenUtils.getUserIdFromToken(token);
         
-        // Get user's rating for this movie
         UserRating userRating = userRatingRepository.findByUser_IdAndMovie_ImdbID(userId, imdbID);
 
-        // Convert movie to MovieDTO and add rating
         MovieDTO movieDTO = MovieMapper.toMovieDTO(movie);
         if (userRating != null) {
             movieDTO.setUserRating(userRating.getRating());
@@ -59,16 +56,13 @@ public class UserMoviesService {
         return movieDTO;
     }
     
-    // Fetch movie by ID and exclude the user's rating
     public MovieDTO getMovieById(String imdbID) {
         Movie movie = movieRepository.findByImdbID(imdbID)
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
         
-        // Get user's rating for this movie
         UserRating userRating = new UserRating();
         userRating.setRating(0);
 
-        // Convert movie to MovieDTO and add rating
         MovieDTO movieDTO = MovieMapper.toMovieDTO(movie);
         if (userRating != null) {
             movieDTO.setUserRating(userRating.getRating());
@@ -77,26 +71,19 @@ public class UserMoviesService {
         return movieDTO;
     }
 
-    // Fetch movies by title and include the user's rating
     public SearchResultDTO getMoviesByTitle(int page_no, String movieName, String authorizationHeader) {
         
-        // Pagination setup
-        PageRequest pageable = PageRequest.of(page_no - 1, 12); // Page starts at 0, so subtract 1 from the page_no
+        PageRequest pageable = PageRequest.of(page_no - 1, 12); 
 
-        // Fetch movies by title with pagination
         Page<Movie> moviePage = movieRepository.findByTitleContainingIgnoreCase(movieName, pageable);
         return searchResultDTO(moviePage, authorizationHeader);
     }
     
-    // Fetch movies by title and exclude the user's rating
     public SearchResultDTO getMoviesByTitle(int page_no, String movieName) {
         
-        // Pagination setup
-        PageRequest pageable = PageRequest.of(page_no - 1, 12); // Page starts at 0, so subtract 1 from the page_no
+        PageRequest pageable = PageRequest.of(page_no - 1, 12); 
 
-        // Fetch movies by title with pagination
         Page<Movie> moviePage = movieRepository.findByTitleContainingIgnoreCase(movieName, pageable);
-        // Map the movies and include the user's rating
         List<MovieSummaryDTO> movieSummaryDTOs = moviePage.getContent().stream()
             .map(movie -> {
                 MovieSummaryDTO movieSummaryDTO = new MovieSummaryDTO();
@@ -109,7 +96,6 @@ public class UserMoviesService {
             })
             .collect(Collectors.toList());
 
-        // Return SearchResultDTO with pagination information
         return new SearchResultDTO(
             movieSummaryDTOs, 
             String.valueOf(moviePage.getTotalElements()), 
@@ -117,24 +103,18 @@ public class UserMoviesService {
         );
     }
 
-    // Fetch all movies and include the user's rating
     public SearchResultDTO getAllMovies(int page_no, String authorizationHeader) {
-    	// Pagination setup
-        PageRequest pageable = PageRequest.of(page_no - 1, 12); // Page starts at 0, so subtract 1 from the page_no
+        PageRequest pageable = PageRequest.of(page_no - 1, 12); 
         
         Page<Movie> moviePage = movieRepository.findAll(pageable);
         return searchResultDTO(moviePage, authorizationHeader);
     }
     
-    // Fetch all movies and exclude the user's rating
     public SearchResultDTO getAllMovies(int page_no) {
         
-        // Pagination setup
-        PageRequest pageable = PageRequest.of(page_no - 1, 12); // Page starts at 0, so subtract 1 from the page_no
+        PageRequest pageable = PageRequest.of(page_no - 1, 12); 
 
-        // Fetch movies by title with pagination
         Page<Movie> moviePage = movieRepository.findAll( pageable);
-        // Map the movies and include the user's rating
         List<MovieSummaryDTO> movieSummaryDTOs = moviePage.getContent().stream()
             .map(movie -> {
                 MovieSummaryDTO movieSummaryDTO = new MovieSummaryDTO();
@@ -147,7 +127,6 @@ public class UserMoviesService {
             })
             .collect(Collectors.toList());
 
-        // Return SearchResultDTO with pagination information
         return new SearchResultDTO(
             movieSummaryDTOs, 
             String.valueOf(moviePage.getTotalElements()), 
@@ -155,14 +134,11 @@ public class UserMoviesService {
         );
     }
     
-    // helper method
     private SearchResultDTO searchResultDTO(Page<Movie> moviePage, String authorizationHeader) {
     	
-    	// Extract the token from the authorization header
-        String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
-        Long userId = jwtTokenUtils.getUserIdFromToken(token); // Get the user ID from the JWT token
+        String token = authorizationHeader.substring(7); 
+        Long userId = jwtTokenUtils.getUserIdFromToken(token);
         
-    	// Map the movies and include the user's rating
         List<MovieSummaryDTO> movieSummaryDTOs = moviePage.getContent().stream()
             .map(movie -> {
                 MovieSummaryDTO movieSummaryDTO = new MovieSummaryDTO();
@@ -172,18 +148,16 @@ public class UserMoviesService {
                 movieSummaryDTO.setType(movie.getType());
                 movieSummaryDTO.setPoster(movie.getPoster());
                 
-                // Get user's rating for this movie
                 UserRating userRating = userRatingRepository.findByUser_IdAndMovie_ImdbID(userId, movie.getImdbID());
                 if (userRating != null) {
                     movieSummaryDTO.setUserRating(userRating.getRating());
                 } else {
-                    movieSummaryDTO.setUserRating(0); // Default to 0 if no rating is found
+                    movieSummaryDTO.setUserRating(0); 
                 }
                 return movieSummaryDTO;
             })
             .collect(Collectors.toList());
 
-        // Return SearchResultDTO with pagination information
         return new SearchResultDTO(
             movieSummaryDTOs, 
             String.valueOf(moviePage.getTotalElements()), 

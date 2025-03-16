@@ -1,5 +1,4 @@
 <div class="movie-card">
-  <!-- Movie Card Click Area -->
   <div class="movie-card-click" (click)="onCardClick($event)">
     <img *ngIf="movie.Poster && movie.Poster !== 'N/A'; else defaultPoster"
         [src]="movie.Poster"
@@ -19,7 +18,6 @@
     </div>
   </div>
 
-  <!-- Movie Operations (Admin Controls) -->
   <div class="movie-operations">
     <button class="addButton" 
             *ngIf="isAdminAdd && !isAdded" 
@@ -39,8 +37,6 @@
     </button>
   </div>
 
-  
-  <!-- Star Rating Section (Visible for Users) -->
   <div *ngIf="isUser" class="rate">
     <div class="rate-title-container">
       <h1 class="rate-title">Rate:</h1>

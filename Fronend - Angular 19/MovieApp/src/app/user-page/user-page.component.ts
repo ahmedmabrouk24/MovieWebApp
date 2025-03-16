@@ -18,11 +18,11 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 export class UserPageComponent implements OnInit {
   movies: any[] = [];
   searchText: string = '';
-  accessToken: string = ''; // Retrieve this from localStorage or sessionStorage
+  accessToken: string = ''; 
   currentPage: number = 1;
   totalPages: number = 0;
   resultsPerPage: number = 12;
-  totalResults: number = 0;     // Total number of results (from API)
+  totalResults: number = 0;   
   isUser: boolean = true;
 
   constructor(
@@ -34,7 +34,6 @@ export class UserPageComponent implements OnInit {
     this.getToken();
     this.fetchMovies();
 
-    // Subscribe to search text changes
     console.log("access token from admin page : " + this.accessToken);
     this.userMovieService.searchText$.subscribe(searchText => {
       this.searchText = searchText;
@@ -47,7 +46,6 @@ export class UserPageComponent implements OnInit {
 
   fetchMovies(): void {
     if (this.searchText === '') {
-      // If search text is empty, fetch the movies list without searching
       this.userMovieService.getAllMovies(this.currentPage, this.accessToken).subscribe(response => {
         if (response && response.Search) {
           this.movies = response.Search;  
@@ -56,7 +54,6 @@ export class UserPageComponent implements OnInit {
         }
       });
     } else {
-      // If there is search text, fetch movies by title
       this.userMovieService.getMoviesByTitle(this.currentPage, this.searchText, this.accessToken).subscribe(response => {
         if (response && response.Search) {
           this.movies = response.Search;  

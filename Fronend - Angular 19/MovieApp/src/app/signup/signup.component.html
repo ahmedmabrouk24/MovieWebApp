@@ -18,10 +18,8 @@
           <input id="password" formControlName="password" type="password" />
         </div>
   
-        <!-- Display error message if there's an error -->
         <div *ngIf="errorMessage" class="error-message" [ngStyle]="{ 'opacity': errorMessage ? 1 : 1 }">{{ errorMessage }}</div>
         
-        <!-- Display success message if registration is successful -->
         <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
   
         <button type="submit" [disabled]="signupForm.invalid">Signup</button>

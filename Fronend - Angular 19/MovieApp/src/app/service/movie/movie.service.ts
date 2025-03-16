@@ -7,14 +7,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class MovieService {
   
-  private searchTextSubject = new BehaviorSubject<string>(''); // Holds the search text
+  private searchTextSubject = new BehaviorSubject<string>(''); 
   searchText$ = this.searchTextSubject.asObservable();
 
   constructor(private http:HttpClient) { }
 
-  // Method to update the search text
   setSearchText(searchText: string): void {
-    this.searchTextSubject.next(searchText); // Update the search text
+    this.searchTextSubject.next(searchText); 
   }
 
   getMoviesList(page: number){

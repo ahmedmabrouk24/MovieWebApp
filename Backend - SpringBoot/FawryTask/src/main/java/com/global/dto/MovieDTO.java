@@ -30,7 +30,6 @@ public class MovieDTO {
     private String Country;
     private String Awards;
     private String Poster;
-    
     private String Metascore;
     private String imdbRating;
     private String imdbVotes;
@@ -42,7 +41,7 @@ public class MovieDTO {
     private String Website;
     private String Response;
 
-    private List<Rating> ratings;  // List of external ratings like IMDb ratings
+    private List<Rating> ratings;  
 
-    private double userRating;  // The rating given by the current user for this movie
+    private double userRating;  
 }

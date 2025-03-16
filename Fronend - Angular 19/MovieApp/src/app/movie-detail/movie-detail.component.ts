@@ -26,7 +26,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private movieService: MovieService,
     private adminMovieService: AdminMovieService,
-    private location: Location,  // Inject Location service
+    private location: Location,  
     @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.accessToken.length > 0) { // admin
+    if (this.accessToken.length > 0) { 
       console.log("ADMIN");
       this.getToken();
       this.adminMovieService.getMovieById(movieId, this.accessToken).subscribe(
@@ -57,7 +57,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         },
         (error) => console.error(error)
       );
-    } else { // user
+    } else { 
       console.log("USER");
       this.movieService.getMovieDetails(movieId).subscribe(
         (data) => {
@@ -78,11 +78,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    // Navigate back to the previous route using Angular Location service
     if (this.previousRoute && this.previousRoute !== '/movie-detail') {
       this.router.navigate([this.previousRoute]);
     } else {
-      this.location.back();  // Use location back as fallback
+      this.location.back(); 
     }
   }
 }

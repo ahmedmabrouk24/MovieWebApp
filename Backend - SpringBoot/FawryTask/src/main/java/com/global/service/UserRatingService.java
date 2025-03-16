@@ -28,20 +28,15 @@ public class UserRatingService {
 
 	@Transactional
 	public UserRating rateMovie(Long userId, String imdbID, double ratingValue) {
-		// Fetch the user by ID
 		User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
-		// If the movie does not exist, throw an exception
 		Movie movie = movieRepository.findByImdbID(imdbID).orElseThrow(() -> new RuntimeException("Movie not found"));
 
-		// Check if the user has already rated the movie
 		UserRating existingRating = userRatingRepository.findByUser_IdAndMovie_ImdbID(userId, imdbID);
 		if (existingRating != null) {
-			// Update the existing rating
 			existingRating.setRating(ratingValue);
 			return userRatingRepository.save(existingRating);
 		} else {
-			// If no existing rating, create a new one
 			UserRating newRating = new UserRating();
 			newRating.setUser(user);
 			newRating.setMovie(movie);

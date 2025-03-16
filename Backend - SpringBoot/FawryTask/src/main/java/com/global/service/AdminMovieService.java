@@ -35,7 +35,6 @@ public class AdminMovieService {
 	}
 
 	public SearchResultDTO getMoviesByTitle(int page_no, String movieName) {
-		// Page number + 1 as OMDb API starts pagination at page 1, not 0.
 		return fetchMoviesFromOmdbApiByTitle(page_no + 1, movieName);
 	}
 
@@ -70,9 +69,7 @@ public class AdminMovieService {
 		}
 	}
 	
-	// Method to add a list of movies in batch
     public List<String> addMoviesBatch(List<String> imdbIDs) {
-    	 // Loop through each imdbID and fetch the corresponding movie
         for (String imdbID : imdbIDs) {
             MovieDTO movieDto = getMovieById(imdbID);
             Optional<Movie> existingMovie = movieRepository.findByImdbID(imdbID);
@@ -85,7 +82,6 @@ public class AdminMovieService {
         return imdbIDs;
     }
 
-    // Method to remove movies by imdbID in batch
     public void removeMoviesBatch(List<String> imdbIDs) {
     	for (String imdbID : imdbIDs) {
             Optional<Movie> existingMovie = movieRepository.findByImdbID(imdbID);
@@ -97,14 +93,11 @@ public class AdminMovieService {
         }
     }
 
-	// method to fetch movie from the OMDb API By Id
 	private MovieDTO getMovieByIdFromOmdbApi(String imdbID) {
 		String url = "https://www.omdbapi.com/?i=" + imdbID + "&apikey=9b0bcb0f";
 		ResponseEntity<Movie> response = restTemplate.getForEntity(url, Movie.class);
 
-		// Check if the response is valid
 		if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-			// Convert the response body to a Movie object
 			Movie movieResponse = response.getBody();
 			return MovieMapper.toMovieDTO(movieResponse);
 		} else {
@@ -112,18 +105,14 @@ public class AdminMovieService {
 		}
 	}
 
-	// method to fetch movie from the OMDb API By Title
 	private SearchResultDTO fetchMoviesFromOmdbApiByTitle(int page_no, String movieTitle) {
 		String url = "https://www.omdbapi.com/?s=" + movieTitle + "&page=" + page_no + "&apikey=9b0bcb0f";
 		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
 		if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-			// To parse the JSON response body into a SearchResultDTO
 			ObjectMapper objectMapper = new ObjectMapper();
 			try {
-				// Convert response to SearchResultDTO
 				SearchResultDTO searchResultDTO = objectMapper.readValue(response.getBody(), SearchResultDTO.class);
-				// Ensure that the search result contains movies
 				if (searchResultDTO.getMovies() != null && !searchResultDTO.getMovies().isEmpty()) {
 					return searchResultDTO;
 				} else {

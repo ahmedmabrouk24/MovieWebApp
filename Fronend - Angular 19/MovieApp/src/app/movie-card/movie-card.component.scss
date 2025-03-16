@@ -11,8 +11,8 @@
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
   display: flex;
-  flex-direction: column;  /* Ensure all items stack vertically */
-  justify-content: space-between; /* Distribute space evenly */
+  flex-direction: column;  
+  justify-content: space-between;
 }
 .movie-card:hover {
   transform: translateY(-5px);
@@ -36,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  flex-grow: 1; /* Allow info to grow without breaking layout */
+  flex-grow: 1;
 }
 
 h2 {
@@ -46,10 +46,10 @@ h2 {
   margin: 0;
   line-height: 1.2;
   text-transform: capitalize;
-  white-space: nowrap; /* Prevent title from wrapping */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Show "..." if title is too long */
-  width: 100%; /* Ensure the title doesn't overflow */
+  text-overflow: ellipsis; 
+  width: 100%; 
 }
 
 .year,
@@ -58,7 +58,7 @@ h2 {
   font-size: 14px;
   color: #555;
   margin: 5px 0;
-  width: 100%; /* Ensure all info stays within the card */
+  width: 100%; 
 }
 
 .year {
@@ -80,88 +80,88 @@ h2 {
   background: #c0392b;
 }
 button {
-  color: white;  /* White text */
+  color: white;  
   width: 80%;
-  font-size: 14px;  /* Font size */
-  font-weight: bold;  /* Make text bold */
-  padding: 8px 16px;  /* Padding for better button size */
-  border: none;  /* Remove default border */
-  border-radius: 5px;  /* Rounded corners */
-  cursor: pointer;  /* Change cursor to pointer */
-  transition: background-color 0.3s ease, transform 0.3s ease;  /* Smooth transitions */
-  text-transform: uppercase;  /* Uppercase text */
+  font-size: 14px;  
+  font-weight: bold;  
+  padding: 8px 16px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  transition: background-color 0.3s ease, transform 0.3s ease;  
+  text-transform: uppercase;  
 }
 
 .addButton:hover {
-  background-color: #009835; /* Darker red on hover */
-  transform: scale(1.05);  /* Slight zoom effect on hover */
+  background-color: #009835; 
+  transform: scale(1.05);  
 }
 .addButton.disabled{
   background-color: gray;
   pointer-events: none;
 }
 .deleteButton:hover {
-  background-color: #982b00; /* Darker red on hover */
-  transform: scale(1.05);  /* Slight zoom effect on hover */
+  background-color: #982b00; 
+  transform: scale(1.05); 
 }
 button:focus {
-  outline: none;  /* Remove focus outline */
+  outline: none;  
 }
 
 button:active {
-  transform: scale(1);  /* Reset scale on button press */
+  transform: scale(1);  
 }
 .rate {
   display: flex;
-  flex-direction: column; /* Keep the overall layout vertical */
-  align-items: center; /* Center the rate title and stars */
+  flex-direction: column; 
+  align-items: center; 
   margin-top: 0px;
 }
 
 .rate-title-container {
   display: flex;
-  align-items: center; /* Align items horizontally */
-  justify-content: center; /* Center both the title and the stars */
+  align-items: center; 
+  justify-content: center; 
 }
 
 .rate-title {
   margin-top: 20px;
-  font-size: 20px; /* Font size for the title */
-  font-weight: 700; /* Make the title bold */
+  font-size: 20px; 
+  font-weight: 700; 
   color: #333;
-  margin-right: 10px; /* Add space between title and stars */
+  margin-right: 10px; 
   text-transform: uppercase;
-  font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
-  background: linear-gradient(45deg, #ff7301, #ffbc11); /* Gradient for modern flair */
+  font-family: 'Poppins', sans-serif; 
+  background: linear-gradient(45deg, #ff7301, #ffbc11); 
   -webkit-background-clip: text;
   color: transparent;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .star-rating {
-  font-size: 30px; /* Make the stars bigger */
-  display: flex; /* Display stars in a row */
-  align-items: center; /* Align the stars vertically */
+  font-size: 30px; 
+  display: flex; 
+  align-items: center; 
 }
 
 .star {
   cursor: pointer;
-  margin: 0 5px; /* Add space between stars */
-  color: #dcdcdc; /* Default gray color */
+  margin: 0 5px; 
+  color: #dcdcdc; 
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .star:hover {
-  color: #ffd700; /* Gold color on hover */
-  transform: scale(1.2); /* Slightly enlarge on hover */
+  color: #ffd700; 
+  transform: scale(1.2); 
 }
 
 .star.filled {
-  color: #ffd700; /* Filled star color */
+  color: #ffd700; 
 }
 
 .star.hovered {
-  color: #ffbf00; /* Star color when hovered over */
+  color: #ffbf00; 
 }
 
 .checkButton {
@@ -170,8 +170,8 @@ button:active {
   border-radius: 5px;
   padding: 8px;
   cursor: pointer;
-  width: 40px; /* Width of the button */
-  height: 40px; /* Height of the button */
+  width: 40px; 
+  height: 40px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,16 +208,16 @@ button:active {
 
 .movie-operations {
   display: flex;
-  justify-content: space-between; /* Space between the buttons */
-  align-items: center; /* Vertically center buttons */
+  justify-content: space-between; 
+  align-items: center; 
   margin-top: 10px;
 }
 
 .movie-buttons {
   display: flex;
-  justify-content: space-between; /* Space between the buttons */
-  width: 100%; /* Make buttons stretch across the container */
-  gap: 10px; /* Space between buttons */
+  justify-content: space-between; 
+  width: 100%; 
+  gap: 10px; 
 }
 
 .checkButton {
@@ -226,8 +226,8 @@ button:active {
   border-radius: 5px;
   padding: 8px;
   cursor: pointer;
-  width: 30px; /* Width of the button */
-  height: 30px; /* Height of the button */
+  width: 30px; 
+  height: 30px; 
   display: flex;
   justify-content: center;
   align-items: center;
