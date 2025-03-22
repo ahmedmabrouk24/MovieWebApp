@@ -37,7 +37,7 @@ export class SignupComponent {
 
   emailValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      const emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]$/;
       const valid = emailRegex.test(control.value);
       return valid ? null : { invalidEmail: 'Please enter a valid email address' };
     };
@@ -65,7 +65,7 @@ export class SignupComponent {
         this.signupForm.reset(); 
       },
       error: (error) => {
-        console.log("here is the error in signup : " + error.message);
+        console.log("here is the error in signup : " + error.error);
         this.errorMessage = 'Signup failed. Please check your credentials.';
         this.successMessage = ''; 
       }

@@ -6,12 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SignupComponent } from './signup/signup.component';
+import { AuthGuard } from './auth.guard';
+
 export const routes: Routes = [
     { path: '', component: MovieListComponent },  
     { path: 'movie-detail/:imdbID', component: MovieDetailComponent },
     { path: 'login', component: LoginComponent }, 
-    { path: 'user-page', component: UserPageComponent }, 
-    { path: 'admin-page', component: AdminPageComponent},  
+    { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard] }, 
+    { path: 'admin-page', component: AdminPageComponent, canActivate: [AuthGuard]},  
     { path: 'signup', component: SignupComponent},  
   ];
 

@@ -33,11 +33,11 @@ export class ServerStatusService {
   }
 
   private clearLocalStorage(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    /*if (isPlatformBrowser(this.platformId)) {
       console.log('Server is down. Clearing localStorage.');
       localStorage.clear(); 
     } else {
       console.log('Not in the browser. localStorage will not be cleared.');
-    }
+    }*/
   }
 }
